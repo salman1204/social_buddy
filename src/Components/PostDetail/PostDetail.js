@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Comment from "../Comment/Comment";
 
@@ -7,24 +7,30 @@ const PostDetail = () => {
   const { postId } = useParams();
   const [post, setPost] = useState({});
 
-  useEffect(() => {
+useEffect(() => {
     const url = `https://jsonplaceholder.typicode.com/posts/${postId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setPost(data));
   }, []);
 
+  const commentStyle= {
+    display: 'flex',
+    color: 'red',
+  }
   return (
-    <div>
-      <div>
-        <h1>Detail of Posts {postId}</h1>
-        <Button variant="contained" color="primary">Back Home</Button>
-        <p>
+  
+      <div>     
+        <h3>
+          <b>Title:</b> {post.title}
+        </h3>
+        <h4>
           <b>Status:</b> {post.body}
-        </p>
-        <Comment postId={postId}></Comment>
+        </h4>
+        <Link to={`/`}><Button variant="contained" color="primary">Back Home</Button></Link> 
+        <Comment postId={postId} style={commentStyle}></Comment>
       </div>
-    </div>
+   
   );
 };
 

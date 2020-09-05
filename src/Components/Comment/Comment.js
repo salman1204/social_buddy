@@ -11,9 +11,9 @@ const Comment = (props) => {
       .then((res) => res.json())
       .then((data) => setComment(data));
   }, []);
+  
   return (
     <div>
-      <h1>{comment.length}</h1>
       {comment.map((comment) => (
         <CommentDetail comment={comment}></CommentDetail>
       ))}
